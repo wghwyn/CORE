@@ -1,0 +1,11 @@
+简介
+=
+>>程序使用的框架是netty+spring+mybatis+jedis,目的是做一个高性能的服务端系统。
+#Spring
+使用Spring框架来配置管理Bean，包括netty框架、mybatis框架、jedis框架、Service层的类，使用AOP来实现进出交易类时写公共日志。
+#Netty
+使用Netty框架来实现异步通讯，客户端可以通过TCP连接远程访问服务器端。
+#Mybatis
+可以使用Mybatis框架的动态SQL配置来写出高性能的SQL，目前支持的是Mysql数据库，数据表用的是Mysql官方样例数据库。
+#jedis
+通过redis数据库实现缓存，提升查询Mysql数据库的性能。

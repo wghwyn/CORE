@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgh.core.db.mapper.SalariesMapper">
+
+    <!--  新增记录  -->
+    <insert id="insertSalaries" parameterType="com.wgh.core.db.model.Salaries" useGeneratedKeys="true" keyProperty="emp_no">
+        insert into salaries(emp_no, salary, from_date, to_date) values(#{emp_no}, #{salary}, #{from_date}, #{to_date})
+    </insert>
+    <!--  修改记录  -->
+    <update id="updateSalaries" parameterType="com.wgh.core.db.model.Salaries">
+        update salaries set salary = #{salary} where emp_no = #{emp_no}
+    </update>
+    <!--  删除记录  -->
+    <delete id="deleteSalaries" parameterType="com.wgh.core.db.model.Salaries">
+        delete from salaries where emp_no = #{emp_no}
+    </delete>
+    <!--  查询所有记录  -->
+    <select id="selectAll" resultType="com.wgh.core.db.model.Salaries">
+        select emp_no,salary,from_date,to_date from salaries order by emp_no
+    </select>
+    <!--  分页查询  -->
+    <select id="selectSalariesList" resultType="com.wgh.core.db.model.Salaries">
+        select emp_no,salary,from_date,to_date from salaries
+        <where>
+            <if test="param.emp_no != null">
+                emp_no in
+                <foreach collection="param.emp_no" item="emp_no" open="(" close=")" separator=",">
+                    #{emp_no}
+                </foreach>
+            </if>
+            <if test="param.from_date != null">
+                <![CDATA[and from_date >= #{param.from_date, jdbcType=DATE}]]>
+            </if>
+            <if test="param.to_date != null">
+                <![CDATA[and to_date <= #{param.to_date, jdbcType=DATE}]]>
+            </if>
+        </where>
+
+        order by emp_no
+        limit #{pageUtil.start},#{pageUtil.pageSize}
+    </select>
+    <!--  查询单条记录  -->
+    <select id="selectSalaries" parameterType="int" resultType="com.wgh.core.db.model.Salaries">
+        select emp_no,salary,from_date,to_date from salaries where emp_no = #{emp_no}
+    </select>
+    <select id="selectSalariesMap" parameterType="int" resultMap="SalariesHashMap">
+        select emp_no, salary, from_date, to_date from salaries where emp_no = #{emp_no}
+    </select>
+    <resultMap id="SalariesHashMap" type="com.wgh.core.db.model.Salaries">
+        <id property="emp_no" column="emp_no"></id>
+        <result property="salary" column="salary"></result>
+    </resultMap>
+</mapper>

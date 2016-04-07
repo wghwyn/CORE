@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Class-Path: spring-tx-4.1.7.RELEASE.jar spring-jdbc-4.1.7.RELEASE.jar 
+ spring-expression-4.1.7.RELEASE.jar spring-core-4.1.7.RELEASE.jar spr
+ ing-context-4.1.7.RELEASE.jar spring-beans-4.1.7.RELEASE.jar spring-a
+ op-4.1.7.RELEASE.jar netty-all-4.0.30.Final.jar mysql-connector-java-
+ 5.1.37.jar mybatis-spring-1.2.3.jar mybatis-3.3.0.jar commons-pool-1.
+ 6.jar commons-logging-1.2.jar commons-dbcp-1.4.jar
+Main-Class: test.TestServer
+
